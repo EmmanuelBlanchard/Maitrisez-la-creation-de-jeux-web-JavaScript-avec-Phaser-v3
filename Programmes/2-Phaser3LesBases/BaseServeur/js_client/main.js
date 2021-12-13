@@ -30,6 +30,7 @@ function preload() {
     this.load.image("haut","haut.png");
     this.load.image("bas","bas.png");
     this.load.image("castle","castle.png");
+    this.load.image("snail", "snailWalk1.png");
 }
 
 function create() {
@@ -37,6 +38,21 @@ function create() {
     var positionCameraCentreY = this.cameras.main.centerY;
     this.add.sprite(positionCameraCentreX,positionCameraCentreY,"castle");
     player = this.add.sprite(positionCameraCentreX,positionCameraCentreY,"joueur");
+
+    var snail = this.add.sprite(500,positionCameraCentreY,"snail");
+    snail.flipX = true;
+    var tween = this.tweens.add({
+        targets : snail,
+        x : 700,
+        ease : "Linear",
+        duration : 1000,
+        yoyo : true,
+        repeat : -1,
+        onStart : function (){},
+        onComplete : function (){},
+        onYoyo : function (){ snail.flipX = !snail.flipX},
+        onRepeat : function (){snail.flipX = !snail.flipX}
+    });
 
     boutonBas = this.add.sprite(50,50,"bas").setInteractive();
     boutonHaut = this.add.sprite(100,50,"haut").setInteractive();
