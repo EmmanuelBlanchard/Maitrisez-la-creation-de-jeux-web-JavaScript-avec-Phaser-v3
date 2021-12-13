@@ -9,6 +9,8 @@ var config = {
     }
 }
 
+var player = null;
+
 const game = new Phaser.Game(config);
 
 function preload() {
@@ -17,8 +19,14 @@ function preload() {
 }
 
 function create() {
-    this.add.sprite(50,50,"joueur");
+    var positionCameraCentreX = this.cameras.main.centerX;
+    var positionCameraCentreY = this.cameras.main.centerY;
+    player = this.add.sprite(positionCameraCentreX,positionCameraCentreY,"joueur");
+    player.setScale(1.5);
+    player.setOrigin(0,0);
+    player.setFlip(true,true);
 }
 
 function update(time, delta) {
+    // player.setAngle(player.angle + 1);
 }
