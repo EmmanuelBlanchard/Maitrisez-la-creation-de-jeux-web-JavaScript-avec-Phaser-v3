@@ -13,11 +13,13 @@ var player = null;
 var clickBoutonHaut = false;
 var clickBoutonBas = false;
 var cursor = null;
+var Vkey;
 
 const game = new Phaser.Game(config);
 
 function preload() {
     this.load.image("joueur","player.png");
+    this.load.image("joueur_cdp","player_kick.png");
     this.load.image("haut","haut.png");
     this.load.image("bas","bas.png");
 }
@@ -51,6 +53,12 @@ function create() {
     });
 
     cursor = this.input.keyboard.createCursorKeys();
+
+    this.input.keyboard.on("keydown_B", function() {
+        console.log("coucou");
+    })
+    
+    Vkey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
 function update(time, delta) {
@@ -61,14 +69,23 @@ function update(time, delta) {
     if(clickBoutonBas) {
         player.setScale(player.scaleX - 0.1, player.scaleY - 0.1);
     }
-
     if(cursor.left.isDown) {
         player.x = player.x - 5;
-    } else if(cursor.right.isDown) {
+    }
+    if(cursor.right.isDown) {
         player.x += 5;
-    } else if(cursor.up.isDown) {
+    }
+    if(cursor.up.isDown) {
         player.y -= 5;
-    }else if(cursor.down.isDown) {
+    }
+    if(cursor.down.isDown) {
         player.y += 5;
+    }
+
+    if(Vkey.isDown) {
+        player.setTexture("joueur_cdp");
+    }
+    if(Vkey.isUp) {
+        player.setTexture("joueur");
     }
 }
