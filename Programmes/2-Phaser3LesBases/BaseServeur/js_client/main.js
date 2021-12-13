@@ -14,6 +14,11 @@ var clickBoutonHaut = false;
 var clickBoutonBas = false;
 var cursor = null;
 var Vkey;
+var boutonBas;
+var boutonHaut;
+var isLeftDown = false;
+var isRightDown = false;
+var isKickDown = false;
 
 const game = new Phaser.Game(config);
 
@@ -24,42 +29,20 @@ function preload() {
     this.load.image("joueur_walk2","player_walk2.png");
     this.load.image("haut","haut.png");
     this.load.image("bas","bas.png");
+    this.load.image("castle","castle.png");
 }
 
 function create() {
     var positionCameraCentreX = this.cameras.main.centerX;
     var positionCameraCentreY = this.cameras.main.centerY;
+    this.add.sprite(positionCameraCentreX,positionCameraCentreY,"castle");
     player = this.add.sprite(positionCameraCentreX,positionCameraCentreY,"joueur");
 
-    var down = this.add.sprite(50,50,"bas").setInteractive();
-    var top = this.add.sprite(100,50,"haut").setInteractive();
+    boutonBas = this.add.sprite(50,50,"bas").setInteractive();
+    boutonHaut = this.add.sprite(100,50,"haut").setInteractive();
 
-    down.on("pointerdown", function() {
-        clickBoutonBas = true;
-    });
-    down.on("pointerup", function() {
-        clickBoutonBas = false;
-    });
-    down.on("pointerout", function() {
-        clickBoutonBas = false;
-    });
-
-    top.on("pointerdown", function() {
-        clickBoutonHaut = true;
-    });
-    top.on("pointerup", function() {
-        clickBoutonHaut = false;
-    });
-    top.on("pointerout", function() {
-        clickBoutonHaut = false;
-    });
-
+    grossirPlayer();
     cursor = this.input.keyboard.createCursorKeys();
-
-    this.input.keyboard.on("keydown_B", function() {
-        console.log("coucou");
-    })
-    
     Vkey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 
     this.anims.create({
@@ -73,19 +56,43 @@ function create() {
     });  
 }
 
-var isLeftDown = false;
-var isRightDown = false;
-var isKickDown = false;
-
 function update(time, delta) {
-    // player.setAngle(player.angle + 1);
+    updateGrossirPlayer();
+    deplacementPlayer();
+}
+
+function grossirPlayer() {
+    boutonBas.on("pointerdown", function() {
+        clickBoutonBas = true;
+    });
+    boutonBas.on("pointerup", function() {
+        clickBoutonBas = false;
+    });
+    boutonBas.on("pointerout", function() {
+        clickBoutonBas = false;
+    });
+
+    boutonHaut.on("pointerdown", function() {
+        clickBoutonHaut = true;
+    });
+    boutonHaut.on("pointerup", function() {
+        clickBoutonHaut = false;
+    });
+    boutonHaut.on("pointerout", function() {
+        clickBoutonHaut = false;
+    });
+}
+
+function updateGrossirPlayer() {
     if(clickBoutonHaut) {
         player.setScale(player.scaleX + 0.1, player.scaleY + 0.1);
     }
     if(clickBoutonBas) {
         player.setScale(player.scaleX - 0.1, player.scaleY - 0.1);
     }
+}
 
+function deplacementPlayer() {
     if(isKickDown) {
         player.setTexture("joueur_cdp");
     } else if(isLeftDown) {
