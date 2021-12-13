@@ -11,24 +11,42 @@ function traitReq(requete, reponse) {
     var monObj = url.parse(requete.url);
     var contentType = "";
 
-    var fichier = "";
-    var encodage = "";
-    var dossier = "";
-    if(monObj.pathname === "/" || monObj.pathname === "/index.html") {
-        contentType = "text/html";
-        fichier = "index.html";
-        encodage = "UTF-8";
-        dossier = "html/"
-    } else if(monObj.pathname === "/main.css") {
-        contentType = "text/css";
-        fichier = "main.css";
-        dossier = "css/"
-    }else if(monObj.pathname === "/main.js") {
-        contentType = "application/javascript";
-        fichier = "main.js";
-        dossier = "js_client/"
+    if(monObj.pathname === "/") {
+        monObj.pathname = "/index.html";
     }
 
+    var encodage = "";
+    var dossier = "";
+
+    var indexDuPoint = monObj.pathname.indexOf(".");
+    var extension = monObj.pathname.substring(indexDuPoint,monObj.pathname.length);
+    var fichier = monObj.pathname.substring(1,monObj.pathname.length);
+
+    switch(extension) {
+        case ".html" : 
+            contentType = "text/html";
+            encodage = "UTF-8";
+            dossier = "html/"
+        break;
+        case ".css" : 
+            contentType = "text/css";
+            dossier = "css/"
+        break;
+        case ".js" : 
+            contentType = "application/javascript";
+            dossier = "js_client/"
+        break;
+        case ".png" : 
+            contentType = "image/png";
+            dossier = "assets/"
+        break;
+        case ".jpf" : 
+            contentType = "image/jpeg";
+            dossier = "assets/"
+        break;
+        default : console.log("Erreur type d'extension non reconnu");
+    }
+    
     if(monObj.pathname !== "/favicon.ico") {
         var pageHtml = fs.readFileSync(dossier + fichier,encodage);
 
