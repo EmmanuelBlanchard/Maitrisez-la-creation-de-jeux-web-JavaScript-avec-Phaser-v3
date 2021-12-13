@@ -20,6 +20,8 @@ const game = new Phaser.Game(config);
 function preload() {
     this.load.image("joueur","player.png");
     this.load.image("joueur_cdp","player_kick.png");
+    this.load.image("joueur_walk1","player_walk1.png");
+    this.load.image("joueur_walk2","player_walk2.png");
     this.load.image("haut","haut.png");
     this.load.image("bas","bas.png");
 }
@@ -59,7 +61,21 @@ function create() {
     })
     
     Vkey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
+
+    this.anims.create({
+        key : "playerWalk",
+        frames : [
+          {key : "joueur_walk1"},
+          {key : "joueur_walk2",}
+        ],
+        frameRate : 8,
+        repeat : -1
+    });  
 }
+
+var isLeftDown = false;
+var isRightDown = false;
+var isKickDown = false;
 
 function update(time, delta) {
     // player.setAngle(player.angle + 1);
@@ -69,23 +85,36 @@ function update(time, delta) {
     if(clickBoutonBas) {
         player.setScale(player.scaleX - 0.1, player.scaleY - 0.1);
     }
-    if(cursor.left.isDown) {
-        player.x = player.x - 5;
-    }
-    if(cursor.right.isDown) {
-        player.x += 5;
-    }
-    if(cursor.up.isDown) {
-        player.y -= 5;
-    }
-    if(cursor.down.isDown) {
-        player.y += 5;
-    }
 
-    if(Vkey.isDown) {
+    if(isKickDown) {
         player.setTexture("joueur_cdp");
+    } else if(isLeftDown) {
+        player.x = player.x - 5;
+        player.anims.play("playerWalk",true);
+        player.setFlip(true,false);
+    } else if(isRightDown) {
+        player.x += 5;
+        player.anims.play("playerWalk",true);
+        player.setFlip(false,false);
+    } else {
+        player.setTexture("joueur");
+    }
+    if(cursor.left.isDown) {
+        isLeftDown = true;
+    } 
+    if(cursor.right.isDown) {
+        isRightDown = true;
+    }
+    if(Vkey.isDown) {
+        isKickDown = true;
     }
     if(Vkey.isUp) {
-        player.setTexture("joueur");
+        isKickDown = false;
+    }
+    if(cursor.left.isUp) {
+        isLeftDown = false;
+    }
+    if(cursor.right.isUp) {
+        isRightDown = false;
     }
 }
