@@ -12,13 +12,13 @@ var config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-    console.log("preload");
+    console.log(this);
+    this.load.image("joueur","player.png");
 }
 
 function create() {
-    console.log("create");
+    this.add.sprite(50,50,"joueur");
 }
 
 function update(time, delta) {
-    console.log("update");
 }
