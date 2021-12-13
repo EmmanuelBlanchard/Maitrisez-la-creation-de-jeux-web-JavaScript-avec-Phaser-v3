@@ -12,6 +12,7 @@ var config = {
 var player = null;
 var clickBoutonHaut = false;
 var clickBoutonBas = false;
+var cursor = null;
 
 const game = new Phaser.Game(config);
 
@@ -34,20 +35,22 @@ function create() {
     });
     down.on("pointerup", function() {
         clickBoutonBas = false;
-    })
+    });
     down.on("pointerout", function() {
         clickBoutonBas = false;
-    })
+    });
 
     top.on("pointerdown", function() {
         clickBoutonHaut = true;
     });
     top.on("pointerup", function() {
         clickBoutonHaut = false;
-    })
+    });
     top.on("pointerout", function() {
         clickBoutonHaut = false;
-    })
+    });
+
+    cursor = this.input.keyboard.createCursorKeys();
 }
 
 function update(time, delta) {
@@ -57,5 +60,15 @@ function update(time, delta) {
     }
     if(clickBoutonBas) {
         player.setScale(player.scaleX - 0.1, player.scaleY - 0.1);
+    }
+
+    if(cursor.left.isDown) {
+        player.x = player.x - 5;
+    } else if(cursor.right.isDown) {
+        player.x += 5;
+    } else if(cursor.up.isDown) {
+        player.y -= 5;
+    }else if(cursor.down.isDown) {
+        player.y += 5;
     }
 }
