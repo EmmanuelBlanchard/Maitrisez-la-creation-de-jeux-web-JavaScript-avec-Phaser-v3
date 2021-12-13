@@ -38,7 +38,15 @@ function create() {
     var positionCameraCentreY = this.cameras.main.centerY;
     this.add.sprite(positionCameraCentreX,positionCameraCentreY,"castle");
     player = this.add.sprite(positionCameraCentreX,positionCameraCentreY,"joueur");
-
+    
+    var policeTitre = {
+        fontSize : "52px",
+        color : "#DA70D6",
+        // fontFamily : "ZCOOL KuaiLe",
+        fontFamily : "Coiny",
+    }
+    this.add.text(positionCameraCentreX,30,"Coucou",policeTitre);
+    
     var snail = this.add.sprite(500,positionCameraCentreY,"snail");
     snail.flipX = true;
     var tween = this.tweens.add({

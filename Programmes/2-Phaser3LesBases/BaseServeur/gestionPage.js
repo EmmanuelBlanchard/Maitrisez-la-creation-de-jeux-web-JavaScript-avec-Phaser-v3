@@ -32,11 +32,15 @@ var gestionPage = {
             case ".png" :
                 data.contentType = "image/png";
                 data.dossier = "assets/"
-            break
+            break;
             case ".jpg" :
                 data.contentType = "image/jpeg";
                 data.dossier = "assets/"
-            break
+            break;
+            case ".ttf" :
+                data.contentType = "font/ttf";
+                data.dossier = "assets/font/"
+            break;
             default : console.log("Erreur : type d'extension non reconnu");
         }
         return data;
