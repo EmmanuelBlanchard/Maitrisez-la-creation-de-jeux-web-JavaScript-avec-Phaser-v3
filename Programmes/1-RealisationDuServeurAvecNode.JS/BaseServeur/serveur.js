@@ -8,5 +8,32 @@ var serveur = http.createServer(traitReq);
 serveur.listen(PORT);
 
 function traitReq(requete, reponse) {
-    console.log("Hello World !");
+    var monObj = url.parse(requete.url);
+    var contentType = "";
+
+    var fichier = "";
+    var encodage = "";
+    var dossier = "";
+    if(monObj.pathname === "/" || monObj.pathname === "/index.html") {
+        contentType = "text/html";
+        fichier = "index.html";
+        encodage = "UTF-8";
+        dossier = "html/"
+    } else if(monObj.pathname === "/main.css") {
+        contentType = "text/css";
+        fichier = "main.css";
+        dossier = "css/"
+    }else if(monObj.pathname === "/main.js") {
+        contentType = "application/javascript";
+        fichier = "main.js";
+        dossier = "js_client/"
+    }
+
+    if(monObj.pathname !== "/favicon.ico") {
+        var pageHtml = fs.readFileSync(dossier + fichier,encodage);
+
+        reponse.writeHead(200,{"Content-Type" : contentType});
+        reponse.write(pageHtml);
+        reponse.end();
+    }
 }
