@@ -41,6 +41,10 @@ var gestionPage = {
                 data.contentType = "font/ttf";
                 data.dossier = "assets/font/"
             break;
+            case ".ogg" :
+                data.contentType = "audio/ogg";
+                data.dossier = "assets/sounds/"
+            break;
             default : console.log("Erreur : type d'extension non reconnu");
         }
         return data;
