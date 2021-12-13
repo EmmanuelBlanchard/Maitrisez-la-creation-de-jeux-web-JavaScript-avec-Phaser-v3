@@ -33,6 +33,8 @@ function preload() {
     this.load.image("castle","castle.png");
     this.load.image("snail", "snailWalk1.png");
 
+    this.load.spritesheet("zombieSPS","ZombieSpriteSheet.png", {frameWidth : 80, frameHeight : 110});
+
     this.load.audio("kick","kick.ogg");
     this.load.audio("ready","ready.ogg");
 }
@@ -74,20 +76,48 @@ function create() {
     cursor = this.input.keyboard.createCursorKeys();
     Vkey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 
-    this.anims.create({
-        key : "playerWalk",
-        frames : [
-          {key : "joueur_walk1"},
-          {key : "joueur_walk2",}
-        ],
-        frameRate : 8,
-        repeat : -1
-    });  
+    genererAnimations();
+    
+    this.add.sprite(300,300).play("zombieWalk");
 }
 
 function update(time, delta) {
     updateGrossirPlayer();
     deplacementPlayer();
+}
+
+
+function genererAnimations() {
+    game.anims.create({
+        key : "playerWalk",
+        frames : [
+        {key : "joueur_walk1"},
+        {key : "joueur_walk2",}
+        ],
+        frameRate : 8,
+        repeat : -1
+    });
+
+    game.anims.create({
+        key : "zombieWalk",
+        frames : game.anims.generateFrameNumbers("zombieSPS",{start:2, end:3}),
+        frameRate : 8,
+        repeat : -1
+    })
+
+    game.anims.create({
+        key : "zombieStand",
+        frames : [{key:"zombieSPS",frame:1}],
+        frameRate : 8,
+        repeat : -1
+    })
+
+    game.anims.create({
+        key : "zombieIdle",
+        frames : game.anims.generateFrameNumbers("zombieSPS",{start:0, end:1}),
+        frameRate : 8,
+        repeat : -1
+    })
 }
 
 function grossirPlayer() {
