@@ -44,6 +44,7 @@ var world = {
     },
     
     collectGemme : function (player,tile) {
+        this.genererParticules(tile.getCenterX(), tile.getCenterY());
         this.addScoreGemme(tile.properties.item);
         this.scoreText.setText("Score : " + this.score);
         this.overlapLayer.removeTileAt(tile.x,tile.y).destroy();
@@ -55,5 +56,24 @@ var world = {
         } else if(item === "gemmeBleu") {
             this.score += 20;
         }
+    },
+
+    genererParticules : function(posX,posY) {
+        var particules = jeu.scene.add.particles("spark");
+
+        var configParticules = {
+            x : posX,
+            y : posY,
+            speed : 200,
+            angle : {min : 180, max : 360},
+            lifeSpan : {min : 100, max :300},
+            scale : {start : 0.1, end : 0.1},
+            blendMode : "ADD"
+        }
+        var emitter = particules.createEmitter(configParticules);
+
+        jeu.scene.time.delayedCall(300, function() {
+            particules.destroy();
+        })
     }
 }

@@ -10,6 +10,7 @@ function preload() {
     jeu.scene.load.image("tiles","tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("map","JeuPlateforme.json");
     jeu.scene.load.atlas("player","player.png","playerAtlas.json");
+    jeu.scene.load.image("spark","particle.png");
 }
 function create() {
     jeu.world.initialiserWorld();

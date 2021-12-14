@@ -34,7 +34,7 @@ var player = {
             this.aPlayer.setVelocityX(0);
         }
         if(jeu.cursor.up.isDown && this.aPlayer.body.onFloor()) {
-            this.aPlayer.setVelocityY(-350);
+            this.aPlayer.setVelocityY(-450);
         }
 
         if(this.aPlayer.body.onFloor()) {
