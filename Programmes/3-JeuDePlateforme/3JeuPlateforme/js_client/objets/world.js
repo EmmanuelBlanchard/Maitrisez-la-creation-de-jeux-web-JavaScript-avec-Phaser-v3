@@ -9,6 +9,7 @@ var world = {
     score : 0,
     scoreText : null,
     gameOver : false,
+    debutZombie1 : null,
 
     initialiserWorld : function() {
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
@@ -19,8 +20,9 @@ var world = {
         this.overlapLayer = this.tilemap.createDynamicLayer("overlap",this.tileset,0,0);
 
         this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
+        this.debutZombie1 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie1");
         this.worldLayer.setCollisionByProperty({Collides : true});
-
+        
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
         
         var policeTitre = {
