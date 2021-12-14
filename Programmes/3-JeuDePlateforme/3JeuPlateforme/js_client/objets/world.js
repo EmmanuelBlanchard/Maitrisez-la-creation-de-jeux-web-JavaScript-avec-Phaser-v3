@@ -38,6 +38,9 @@ var world = {
         this.overlapLayer.setTileIndexCallback(71,this.killPlayer,this);
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer)
         jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.overlapLayer);
+
+        jeu.scene.physics.add.collider(jeu.zombie.aZombie,this.worldLayer);
+        jeu.scene.physics.add.overlap(jeu.player.aPlayer,jeu.zombie.aZombie,this.attackZombie);
     },
     
     gererCamera : function() {
@@ -96,6 +99,14 @@ var world = {
                 fontFamily : "ZCOOL KuaiLe"
             }
             this.scoreText = jeu.scene.add.text(jeu.scene.cameras.main.midPoint.x-200,jeu.scene.cameras.main.midPoint.y-100,"Tu es mort \n Recommencer ?",policeTitre);
+        }
+    },
+
+    attackZombie : function() {
+        if(jeu.player.isJumping) {
+            jeu.zombie.detruireZombie();
+        } else {
+            jeu.world.killPlayer();
         }
     }
 
