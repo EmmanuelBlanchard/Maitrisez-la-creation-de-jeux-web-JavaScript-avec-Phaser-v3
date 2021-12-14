@@ -3,8 +3,9 @@ var player = {
     isJumping : false,
 
     initialiserPlayer : function() {
-        this.aPlayer = jeu.scene.physics.add.sprite(200,200,"player","adventurer_stand");
+        this.aPlayer = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player","adventurer_stand");
         this.aPlayer.setCollideWorldBounds(true);
+        this.aPlayer.setOrigin(0.5,1);
     },
     
     generatePlayerAnimations : function() {

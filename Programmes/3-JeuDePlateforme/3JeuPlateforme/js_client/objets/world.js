@@ -5,6 +5,9 @@ var world = {
     worldLayer : null,
     topLayer : null,
     overlapLayer : null,
+    positionDebut : null,
+    score : 0,
+    scoreText : null,
 
     initialiserWorld : function() {
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
@@ -14,9 +17,18 @@ var world = {
         this.topLayer = this.tilemap.createStaticLayer("top",this.tileset,0,0);
         this.overlapLayer = this.tilemap.createDynamicLayer("overlap",this.tileset,0,0);
 
+        this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
         this.worldLayer.setCollisionByProperty({Collides : true});
 
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+        
+        var policeTitre = {
+            fontSize : "32px",
+            color : "#FF0000",
+            fontFamily : "ZCOOL KuaiLe"
+        }
+        this.scoreText = jeu.scene.add.text(16,16,"Score : 0",policeTitre);
+        this.scoreText.setScrollFactor(0);
     },
 
     gererCollider : function() {
@@ -32,6 +44,16 @@ var world = {
     },
     
     collectGemme : function (player,tile) {
+        this.addScoreGemme(tile.properties.item);
+        this.scoreText.setText("Score : " + this.score);
         this.overlapLayer.removeTileAt(tile.x,tile.y).destroy();
+    },
+
+    addScoreGemme : function(item) {
+        if(item === "gemmeRouge") {
+            this.score += 10;
+        } else if(item === "gemmeBleu") {
+            this.score += 20;
+        }
     }
 }
