@@ -2,7 +2,7 @@ var player = {
     aPlayer : null,
 
     initialiserPlayer : function() {
-        this.aPlayer = jeu.scene.add.sprite(200,200,"player","adventurer_stand");
+        this.aPlayer = jeu.scene.physics.add.sprite(200,200,"player","adventurer_stand");
     },
     
     generatePlayerAnimations : function() {
@@ -12,5 +12,16 @@ var player = {
             frameRate : 5,
             repeat : -1
         });
+    },
+
+    gererDeplacement : function() {
+        if(jeu.cursor.left.isDown) {
+            this.aPlayer.setVelocityX(-200);
+        } else if(jeu.cursor.right.isDown) {
+            this.aPlayer.setVelocityX(200);
+        }
+        else {
+            this.aPlayer.setVelocityX(0);
+        }
     }
 }

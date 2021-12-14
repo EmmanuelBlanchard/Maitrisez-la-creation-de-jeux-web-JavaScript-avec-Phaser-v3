@@ -11,6 +11,12 @@ var world = {
         this.downLayer = this.tilemap.createStaticLayer("bot",this.tileset,0,0);
         this.worldLayer = this.tilemap.createStaticLayer("world",this.tileset,0,0);
         this.topLayer = this.tilemap.createStaticLayer("top",this.tileset,0,0);
+
+        this.worldLayer.setCollisionByProperty({Collides : true});
+    },
+
+    gererCollider : function() {
+        jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer);
     }
    
 }

@@ -1,7 +1,8 @@
 var jeu = {
     scene : null,
     world : world,
-    player : player
+    player : player,
+    cursor : null
 }
 
 function preload() {
@@ -14,8 +15,10 @@ function create() {
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
     jeu.player.generatePlayerAnimations();
-    jeu.player.aPlayer.anims.play("playerWalk");
+
+    jeu.world.gererCollider();
+    jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
 }
 function update(time, delta) {
-
+    jeu.player.gererDeplacement();
 }
