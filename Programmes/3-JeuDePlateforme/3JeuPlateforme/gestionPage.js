@@ -31,19 +31,19 @@ var gestionPage = {
             break;
             case ".png" :
                 data.contentType = "image/png";
-                data.dossier = "assets/images"
+                data.dossier = "assets/images/"
             break;
             case ".jpg" :
                 data.contentType = "image/jpeg";
-                data.dossier = "assets/images"
+                data.dossier = "assets/images/"
             break;
             case ".json" :
                 data.contentType = "application/json";
-                data.dossier = "assets/json"
+                data.dossier = "assets/json/"
             break;
             case ".ogg" :
                 data.contentType = "audio/ogg";
-                data.dossier = "assets/sounds"
+                data.dossier = "assets/sounds/"
             break;
             default : console.log("Erreur : type d'extension non reconnu");
         }
