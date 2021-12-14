@@ -8,6 +8,7 @@ var world = {
     positionDebut : null,
     score : 0,
     scoreText : null,
+    gameOver : false,
 
     initialiserWorld : function() {
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
@@ -32,8 +33,9 @@ var world = {
     },
 
     gererCollider : function() {
-        this.overlapLayer.setTileIndexCallback(50,this.collectGemme,this); 
+        this.overlapLayer.setTileIndexCallback(50, this.collectGemme, this); 
         this.overlapLayer.setTileIndexCallback(53,this.collectGemme,this);
+        this.overlapLayer.setTileIndexCallback(71,this.killPlayer,this);
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer)
         jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.overlapLayer);
     },
@@ -44,7 +46,8 @@ var world = {
     },
     
     collectGemme : function (player,tile) {
-        this.genererParticules(tile.getCenterX(), tile.getCenterY());
+        jeu.scene.sound.play("gemmeSound");
+        this.genererParticules(tile.getCenterX(),tile.getCenterY());
         this.addScoreGemme(tile.properties.item);
         this.scoreText.setText("Score : " + this.score);
         this.overlapLayer.removeTileAt(tile.x,tile.y).destroy();
@@ -75,5 +78,25 @@ var world = {
         jeu.scene.time.delayedCall(300, function() {
             particules.destroy();
         })
+    },
+    
+    killPlayer : function() {
+        if(!this.gameOver) {
+            this.gameOver = true;
+            jeu.player.killPlayer();
+            jeu.scene.add.sprite(jeu.scene.cameras.main.midPoint.x,jeu.scene.cameras.main.midPoint.y,"panel").setScale(5,3);
+            var restartBouton = jeu.scene.add.sprite(jeu.scene.cameras.main.midPoint.x,jeu.scene.cameras.main.midPoint.y+100,"validation").setInteractive();
+            restartBouton.on("pointerup", function() {
+                jeu.scene.scene.restart();
+            });
+
+            var policeTitre = {
+                fontSize : "52px",
+                color : "#FFFFFF",
+                fontFamily : "ZCOOL KuaiLe"
+            }
+            this.scoreText = jeu.scene.add.text(jeu.scene.cameras.main.midPoint.x-200,jeu.scene.cameras.main.midPoint.y-100,"Tu es mort \n Recommencer ?",policeTitre);
+        }
     }
+
 }

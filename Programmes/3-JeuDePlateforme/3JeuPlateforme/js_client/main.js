@@ -11,6 +11,13 @@ function preload() {
     jeu.scene.load.tilemapTiledJSON("map","JeuPlateforme.json");
     jeu.scene.load.atlas("player","player.png","playerAtlas.json");
     jeu.scene.load.image("spark","particle.png");
+    jeu.scene.load.audio("gemmeSound","gemmeSound.ogg");
+
+    jeu.scene.load.image("validation","yellow_boxCheckmark.png");
+    jeu.scene.load.image("panel","yellow_panel.png");
+
+    jeu.world.gameOver = false;
+    jeu.player.isAlive = true;
 }
 function create() {
     jeu.world.initialiserWorld();
