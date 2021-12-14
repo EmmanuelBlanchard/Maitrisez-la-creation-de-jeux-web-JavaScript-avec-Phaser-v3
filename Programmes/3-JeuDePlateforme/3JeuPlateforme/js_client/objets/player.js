@@ -3,6 +3,7 @@ var player = {
 
     initialiserPlayer : function() {
         this.aPlayer = jeu.scene.physics.add.sprite(200,200,"player","adventurer_stand");
+        this.aPlayer.setCollideWorldBounds(true);
     },
     
     generatePlayerAnimations : function() {

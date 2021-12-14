@@ -13,10 +13,17 @@ var world = {
         this.topLayer = this.tilemap.createStaticLayer("top",this.tileset,0,0);
 
         this.worldLayer.setCollisionByProperty({Collides : true});
+        
+        jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
 
     gererCollider : function() {
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer);
+    },
+    
+    gererCamera : function() {
+        jeu.scene.cameras.main.startFollow(jeu.player.aPlayer);
+        jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     }
    
 }
