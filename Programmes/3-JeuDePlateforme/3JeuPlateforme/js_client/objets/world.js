@@ -10,6 +10,8 @@ var world = {
     scoreText : null,
     gameOver : false,
     debutZombie1 : null,
+    debutZombie2 : null,
+    debutZombie3 : null,
 
     initialiserWorld : function() {
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
@@ -21,8 +23,10 @@ var world = {
 
         this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
         this.debutZombie1 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie1");
+        this.debutZombie2 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie2");
+        this.debutZombie3 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie3");
         this.worldLayer.setCollisionByProperty({Collides : true});
-        
+
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
         
         var policeTitre = {
@@ -40,9 +44,6 @@ var world = {
         this.overlapLayer.setTileIndexCallback(71,this.killPlayer,this);
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer)
         jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.overlapLayer);
-
-        jeu.scene.physics.add.collider(jeu.zombie.aZombie,this.worldLayer);
-        jeu.scene.physics.add.overlap(jeu.player.aPlayer,jeu.zombie.aZombie,this.attackZombie);
     },
     
     gererCamera : function() {
@@ -100,16 +101,7 @@ var world = {
                 color : "#FFFFFF",
                 fontFamily : "ZCOOL KuaiLe"
             }
-            this.scoreText = jeu.scene.add.text(jeu.scene.cameras.main.midPoint.x-200,jeu.scene.cameras.main.midPoint.y-100,"Tu es mort \n Recommencer ?",policeTitre);
-        }
-    },
-
-    attackZombie : function() {
-        if(jeu.player.isJumping) {
-            jeu.zombie.detruireZombie();
-        } else {
-            jeu.world.killPlayer();
+            jeu.scene.add.text(jeu.scene.cameras.main.midPoint.x-200,jeu.scene.cameras.main.midPoint.y-100,"Tu es mort \n Recommencer ?",policeTitre);
         }
     }
-
 }

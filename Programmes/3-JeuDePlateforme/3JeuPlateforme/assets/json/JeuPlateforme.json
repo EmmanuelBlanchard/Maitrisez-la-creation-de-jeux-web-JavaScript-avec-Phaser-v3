@@ -91,8 +91,32 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":773,
-                 "y":441
+                 "x":295,
+                 "y":312
+                }, 
+                {
+                 "gid":62,
+                 "height":64,
+                 "id":4,
+                 "name":"debutZombie2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":776,
+                 "y":443
+                }, 
+                {
+                 "gid":62,
+                 "height":64,
+                 "id":5,
+                 "name":"debutZombie3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1354,
+                 "y":313
                 }],
          "opacity":0.9,
          "type":"objectgroup",
@@ -101,7 +125,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":4,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.1",
