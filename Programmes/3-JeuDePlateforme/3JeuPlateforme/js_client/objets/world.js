@@ -6,6 +6,7 @@ var world = {
     topLayer : null,
     overlapLayer : null,
     positionDebut : null,
+    positionFin : null,
     score : 0,
     scoreText : null,
     gameOver : false,
@@ -22,6 +23,8 @@ var world = {
         this.overlapLayer = this.tilemap.createDynamicLayer("overlap",this.tileset,0,0);
 
         this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
+        this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "fin");
+
         this.debutZombie1 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie1");
         this.debutZombie2 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie2");
         this.debutZombie3 = this.tilemap.findObject("Objects", obj => obj.name === "debutZombie3");
@@ -42,8 +45,31 @@ var world = {
         this.overlapLayer.setTileIndexCallback(50, this.collectGemme, this); 
         this.overlapLayer.setTileIndexCallback(53,this.collectGemme,this);
         this.overlapLayer.setTileIndexCallback(71,this.killPlayer,this);
+        this.overlapLayer.setTileIndexCallback(76,this.finLevel,this);
+        this.overlapLayer.setTileIndexCallback(90,this.finLevel,this);
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.worldLayer)
         jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.overlapLayer);
+    },
+
+    finLevel : function(player,tile) {
+        if(player.x > this.positionFin.x - 2 && player.x < this.positionFin.x +2) {
+            if(!this.gameOver) {
+                this.gameOver = true;
+                jeu.player.killPlayer();
+                jeu.scene.add.sprite(jeu.scene.cameras.main.midPoint.x,jeu.scene.cameras.main.midPoint.y,"panel").setScale(5,3);
+                var restartBouton = jeu.scene.add.sprite(jeu.scene.cameras.main.midPoint.x,jeu.scene.cameras.main.midPoint.y+100,"validation").setInteractive();
+                restartBouton.on("pointerup", function() {
+                    jeu.scene.scene.restart();
+                });
+    
+                var policeTitre = {
+                    fontSize : "52px",
+                    color : "#FFFFFF",
+                    fontFamily : "ZCOOL KuaiLe"
+                }
+                jeu.scene.add.text (jeu.scene.cameras.main.midPoint.x-200,jeu.scene.cameras.main.midPoint.y-100, "Tu as gagné \n Recommencer ?", policeTitre);
+            }
+        }
     },
     
     gererCamera : function() {
