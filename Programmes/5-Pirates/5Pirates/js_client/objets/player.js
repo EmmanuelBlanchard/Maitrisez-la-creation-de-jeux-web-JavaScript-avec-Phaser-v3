@@ -15,6 +15,10 @@ var player = {
     speedRatio : 7,
     speedReduction : 3,
     targetAngle : 0,
+    isShooting : false,
+    pointer : null,
+    fireRate : 500,
+    nextFire : 0,
 
     initialiserPlayer : function() {
         this.aPlayer = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player");
@@ -27,6 +31,14 @@ var player = {
         this.keyS = jeu.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keyZ = jeu.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.keyShift = jeu.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+
+        jeu.scene.input.on("pointerdown",function(pointer) {
+            this.pointer = pointer;
+            this.isShooting = true;
+        },this);
+        jeu.scene.input.on("pointerup",function() {
+            this.isShooting = false;
+        },this);
     },
     
     generatePlayerAnimations : function() {
@@ -145,5 +157,15 @@ var player = {
                 this.aPlayer.angle -= this.speedRatio/2;
             }
         }
-    }
+    },
+
+    tirer : function() {
+        if(this.isShooting) {
+            if(jeu.scene.time.now > this.nextFire) {
+                this.nextFire = jeu.scene.time.now + this.fireRate;
+                var bullet = jeu.scene.physics.add.sprite(this.aPlayer.x,this.aPlayer.y,"cannonBall");
+                jeu.scene.physics.moveTo(bullet,this.pointer.worldX,this.pointer.worldY,750);
+            }
+        }
+    } 
 }

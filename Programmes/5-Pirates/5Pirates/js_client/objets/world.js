@@ -7,6 +7,7 @@ var world = {
     layerItems : null,
     positionDebut : null,
     positionFin : null,
+    drapeauFin : null,
     score : 0,
     scoreText : null,
 
@@ -19,7 +20,9 @@ var world = {
         this.layerItems = this.tilemap.createDynamicLayer("items",this.tileset,0,0);
 
         this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "Debut");
+        jeu.scene.add.sprite(this.positionDebut.x,this.positionDebut.y,"debut").setScale(3);
         this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "Fin");
+        this.drapeauFin = jeu.scene.add.sprite(this.positionFin.x,this.positionFin.y,"fin").setScale(3);
 
         this.layerLand.setCollisionByProperty({Collides : true});
 
