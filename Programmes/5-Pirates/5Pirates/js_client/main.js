@@ -9,9 +9,12 @@ function preload() {
     jeu.scene = this;
     jeu.scene.load.image("tiles","tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("level1","level1.json");
+    jeu.scene.load.image("player","shipG.png");
 }
 function create() {
     jeu.world.initialiserWorld();
+    jeu.player.initialiserPlayer();
+    jeu.world.gererCamera();
 }
 function update(time,delta) {
     ajusterTailleEcran();

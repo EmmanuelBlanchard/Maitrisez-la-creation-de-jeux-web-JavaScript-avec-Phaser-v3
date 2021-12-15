@@ -18,8 +18,8 @@ var world = {
         this.layerLand = this.tilemap.createStaticLayer("land",this.tileset,0,0);
         this.layerItems = this.tilemap.createDynamicLayer("items",this.tileset,0,0);
 
-        this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
-        this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "fin");
+        this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "Debut");
+        this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "Fin");
 
         this.layerLand.setCollisionByProperty({Collides : true});
 
@@ -30,6 +30,7 @@ var world = {
         // jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
     },
     gererCamera : function() {
-      
+        jeu.scene.cameras.main.startFollow(jeu.player.aPlayer);
+        jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels, this.tilemap.heightInPixels);
     },
 }
