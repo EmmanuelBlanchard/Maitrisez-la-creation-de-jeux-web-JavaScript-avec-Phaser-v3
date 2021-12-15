@@ -24,7 +24,7 @@ var world = {
         this.topLayer = this.tilemap.createStaticLayer("top",this.tilesetTerrain,0,0);
         this.overlapLayer = this.tilemap.createDynamicLayer("overlap",this.tilesetTerrain,0,0);
 
-        this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "debut");
+        this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "Debut");
         this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "fin");
 
         this.worldLayer.setCollisionByProperty({Collides : true});
