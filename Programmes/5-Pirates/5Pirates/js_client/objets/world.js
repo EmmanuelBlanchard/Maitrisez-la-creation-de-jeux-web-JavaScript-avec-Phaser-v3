@@ -29,11 +29,11 @@ var world = {
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
     gererCollider : function() {
-        jeu.scene.physics.add.collider(jeu.player.aPlayer, this.layerLand);
-        // jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
+        jeu.scene.physics.add.collider(jeu.player.aPlayer,this.layerLand);
+        // jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.overlapLayer);
     },
     gererCamera : function() {
         jeu.scene.cameras.main.startFollow(jeu.player.aPlayer);
-        jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels, this.tilemap.heightInPixels);
+        jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
 }

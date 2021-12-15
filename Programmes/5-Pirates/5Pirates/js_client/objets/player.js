@@ -43,8 +43,7 @@ var player = {
         },this);
 
         this.bullets = jeu.scene.physics.add.group({
-            defaultKey : "cannonBall",
-            maxSize : 10
+            defaultKey : "cannonBall"
         })
     },
     
@@ -172,7 +171,9 @@ var player = {
                 this.nextFire = jeu.scene.time.now + this.fireRate;
                 var shoot = this.bullets.get(this.aPlayer.x,this.aPlayer.y);
                 jeu.scene.physics.moveTo(shoot,this.pointer.worldX,this.pointer.worldY,750);
+                shoot.checkWorldBounds = true;
+                shoot.outOfBoundsKill = true;
             }
         }
-    },
+    }
 }

@@ -19,6 +19,8 @@ function preload() {
     jeu.scene.load.image("ennemi1b","ennemi/ennemi1b.png");
     jeu.scene.load.image("ennemi1c","ennemi/ennemi1c.png");
     jeu.scene.load.image("ennemi1d","ennemi/ennemi1d.png");
+    jeu.scene.load.image("life","life.png");
+    jeu.scene.load.image("lifeRED","lifeRED.png");
 }
 function create() {
     jeu.world.initialiserWorld();
