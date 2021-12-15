@@ -19,6 +19,8 @@ var player = {
     pointer : null,
     fireRate : 500,
     nextFire : 0,
+    bullets : null,
+    attaque : 15,
 
     initialiserPlayer : function() {
         this.aPlayer = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player");
@@ -39,6 +41,11 @@ var player = {
         jeu.scene.input.on("pointerup",function() {
             this.isShooting = false;
         },this);
+
+        this.bullets = jeu.scene.physics.add.group({
+            defaultKey : "cannonBall",
+            maxSize : 10
+        })
     },
     
     generatePlayerAnimations : function() {
@@ -163,9 +170,9 @@ var player = {
         if(this.isShooting) {
             if(jeu.scene.time.now > this.nextFire) {
                 this.nextFire = jeu.scene.time.now + this.fireRate;
-                var bullet = jeu.scene.physics.add.sprite(this.aPlayer.x,this.aPlayer.y,"cannonBall");
-                jeu.scene.physics.moveTo(bullet,this.pointer.worldX,this.pointer.worldY,750);
+                var shoot = this.bullets.get(this.aPlayer.x,this.aPlayer.y);
+                jeu.scene.physics.moveTo(shoot,this.pointer.worldX,this.pointer.worldY,750);
             }
         }
-    } 
+    },
 }

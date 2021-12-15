@@ -3,6 +3,7 @@ var jeu = {
     world : world,
     player : player,
     ennemiTemplate : ennemiTemplate,
+    ennemis : [],
     cursor : null
 }
 
@@ -25,8 +26,12 @@ function create() {
     jeu.world.gererCamera();
     jeu.world.gererCollider();
 
-    jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x - 100,jeu.player.aPlayer.y - 100).initEnnemi();
-    jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x + 200,jeu.player.aPlayer.y - 100).initEnnemi();
+    var e1 = jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x - 100,jeu.player.aPlayer.y - 100);
+    e1.initEnnemi();
+    jeu.ennemis.push(e1);
+    var e2 = jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x + 100,jeu.player.aPlayer.y - 200);
+    e2.initEnnemi();
+    jeu.ennemis.push(e2);
 }
 function update(time,delta) {
     ajusterTailleEcran();
