@@ -12,6 +12,7 @@ var world = {
     positionFin : null,
     drapeauFin : null,
     score : 0,
+    scoreLevel : 0,
     scoreText : null,
     isLevelFin : false,
     nbPieces : null,
@@ -39,10 +40,16 @@ var world = {
 
         var policeTitre = {
             fontSize : "32px",
-            color : "#FF0000",
+            color : "#FFFFFF",
             fontFamily : "ZCOOL KuaiLe"
         }
-        this.scoreText = jeu.scene.add.text (16,16,"Score : 0",policeTitre);
+        
+        var panel = jeu.scene.add.sprite(400,0,"panel");
+        panel.setScale(4,1);
+        panel.setOrigin(0,0);
+        panel.setScrollFactor(0);
+
+        this.scoreText = jeu.scene.add.text(460,30,"Score : " + this.score + " - level " + jeu.level,policeTitre);
         this.scoreText.setScrollFactor(0);
     },
     gererCollider : function(){
@@ -74,6 +81,7 @@ var world = {
         }
     },
     contactPlayerWorld : function() {
+        jeu.world.scoreLevel = 0;
         jeu.scene.sound.play("hurt");
         jeu.scene.scene.restart();
     },
@@ -90,6 +98,7 @@ var world = {
         }
     },
     nextLevel : function() {
+        jeu.world.score += jeu.world.scoreLevel;
         jeu.level++;
         jeu.scene.scene.restart();
         jeu.player.ableToMove = true;
@@ -104,6 +113,8 @@ var world = {
     },
     collectPiece : function(player,piece) {
         jeu.scene.sound.play("collect");
+        jeu.world.scoreLevel += 10;
+        jeu.world.scoreText.setText("Score : " + (jeu.world.score + jeu.world.scoreLevel)  + " -  Level " + jeu.level);
         piece.destroy();
     },
     creerAnimationPiece : function() {

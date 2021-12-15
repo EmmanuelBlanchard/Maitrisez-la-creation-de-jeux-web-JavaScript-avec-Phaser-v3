@@ -19,12 +19,13 @@ function preload() {
     jeu.scene.load.image("playerIdent","ident.png");
     jeu.scene.load.image("debut","debut.png");
     jeu.scene.load.image("fin","fin.png");
-
     jeu.scene.load.image("piece1","piece1.png");
     jeu.scene.load.image("piece2","piece2.png");
     jeu.scene.load.audio("collect","collect.ogg");
     jeu.scene.load.audio("hurt","laser1.ogg");
     jeu.scene.load.audio("win","you_win.ogg");
+
+    jeu.scene.load.image("panel","blue_panel.png");
 }
 function create() {
     jeu.world.creerAnimationPiece();
