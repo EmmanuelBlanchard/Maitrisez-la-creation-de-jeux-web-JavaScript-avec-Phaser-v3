@@ -2,14 +2,16 @@ var jeu = {
     scene : null,
     world : world,
     player : player,
-    cursor : null
+    cursor : null,
+    level : 1
 }
 
 function preload() {
     jeu.scene = this;
     jeu.scene.load.image("terrain","terrain.png");
     jeu.scene.load.image("tilesPerso","tilesPerso.png");
-    jeu.scene.load.tilemapTiledJSON("map","level1.json");
+    jeu.scene.load.tilemapTiledJSON("map1","level1.json");
+    jeu.scene.load.tilemapTiledJSON("map2","level2.json");
     jeu.scene.load.image("playerBarre","playerBarre.png");
     jeu.scene.load.image("playerCenter","playerCenter.png");
     jeu.scene.load.image("playerIdent","ident.png");
