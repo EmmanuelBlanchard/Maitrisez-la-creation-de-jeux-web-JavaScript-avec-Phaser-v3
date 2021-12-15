@@ -12,13 +12,22 @@ function preload() {
     jeu.scene.load.image("tilesPerso","tilesPerso.png");
     jeu.scene.load.tilemapTiledJSON("map1","level1.json");
     jeu.scene.load.tilemapTiledJSON("map2","level2.json");
+    jeu.scene.load.tilemapTiledJSON("map3","level3.json");
+    jeu.scene.load.tilemapTiledJSON("map4","level4.json");
     jeu.scene.load.image("playerBarre","playerBarre.png");
     jeu.scene.load.image("playerCenter","playerCenter.png");
     jeu.scene.load.image("playerIdent","ident.png");
     jeu.scene.load.image("debut","debut.png");
     jeu.scene.load.image("fin","fin.png");
+
+    jeu.scene.load.image("piece1","piece1.png");
+    jeu.scene.load.image("piece2","piece2.png");
+    jeu.scene.load.audio("collect","collect.ogg");
+    jeu.scene.load.audio("hurt","laser1.ogg");
+    jeu.scene.load.audio("win","you_win.ogg");
 }
 function create() {
+    jeu.world.creerAnimationPiece();
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
     jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();

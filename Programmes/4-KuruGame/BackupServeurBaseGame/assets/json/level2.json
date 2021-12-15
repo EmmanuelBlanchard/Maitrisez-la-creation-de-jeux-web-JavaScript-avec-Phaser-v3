@@ -86,17 +86,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":1,
-                 "name":"Debut",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":242,
-                 "y":314
-                }, 
-                {
-                 "height":0,
                  "id":2,
                  "name":"Fin",
                  "rotation":0,
@@ -105,6 +94,89 @@
                  "width":0,
                  "x":1660,
                  "y":314
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"Debut",
+                 "properties":[
+                        {
+                         "name":"nbPieces",
+                         "type":"int",
+                         "value":6
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":232,
+                 "y":324
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"Piece1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":686.67,
+                 "y":316
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"Piece2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":836.67,
+                 "y":384.667
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"Piece3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":888.003,
+                 "y":274
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"Piece4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1090,
+                 "y":320.333
+                }, 
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"Piece5",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1265,
+                 "y":243
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Piece6",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1396,
+                 "y":374
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -113,7 +185,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":5,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.1",
@@ -122,7 +194,7 @@
         {
          "columns":5,
          "firstgid":1,
-         "image":"..\/tuto2\/tuto\/4Kuru\/assets\/images\/tilesPerso.png",
+         "image":"..\/images\/tilesPerso.png",
          "imageheight":256,
          "imagewidth":320,
          "margin":0,
@@ -316,7 +388,7 @@
         {
          "columns":10,
          "firstgid":21,
-         "image":"..\/tuto2\/tuto\/4Kuru\/assets\/images\/terrain.png",
+         "image":"..\/images\/terrain.png",
          "imageheight":256,
          "imagewidth":640,
          "margin":0,
