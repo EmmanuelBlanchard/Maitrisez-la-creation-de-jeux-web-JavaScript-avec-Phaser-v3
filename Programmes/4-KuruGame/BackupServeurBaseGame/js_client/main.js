@@ -18,10 +18,9 @@ function preload() {
 function create() {
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
-
     jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
-
     jeu.world.gererCamera();
+    jeu.world.gererCollider();
 }
 function update(time,delta) {
     ajusterTailleEcran();
