@@ -16,10 +16,15 @@ function preload() {
 function create() {
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
+
+    jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
+
+    jeu.world.gererCamera();
 }
 function update(time,delta) {
     ajusterTailleEcran();
     jeu.player.gererRotation();
+    jeu.player.gererDeplacement();
 }
 
 function ajusterTailleEcran() {

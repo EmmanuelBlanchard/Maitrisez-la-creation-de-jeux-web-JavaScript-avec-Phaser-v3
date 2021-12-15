@@ -44,6 +44,7 @@ var world = {
         jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
     },
     gererCamera : function() {
-      
+        jeu.scene.cameras.main.startFollow(jeu.player.aPlayer);
+        jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
 }
