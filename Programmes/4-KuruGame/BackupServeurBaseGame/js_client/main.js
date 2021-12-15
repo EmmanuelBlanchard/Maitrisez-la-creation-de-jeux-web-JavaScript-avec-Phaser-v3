@@ -7,9 +7,12 @@ var jeu = {
 
 function preload() {
     jeu.scene = this;
+    jeu.scene.load.image("terrain","terrain.png");
+    jeu.scene.load.image("tilesPerso","tilesPerso.png");
+    jeu.scene.load.tilemapTiledJSON("map","level1.json");
 }
 function create() {
-
+    jeu.world.initialiserWorld();
 }
 function update(time,delta) {
     ajusterTailleEcran();
