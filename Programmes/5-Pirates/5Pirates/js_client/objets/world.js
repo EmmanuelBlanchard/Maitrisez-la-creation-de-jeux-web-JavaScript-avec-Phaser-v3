@@ -26,7 +26,7 @@ var world = {
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
     gererCollider : function() {
-        // jeu.scene.physics.add.collider(jeu.player.aPlayer, this.worldLayer)
+        jeu.scene.physics.add.collider(jeu.player.aPlayer, this.layerLand);
         // jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
     },
     gererCamera : function() {

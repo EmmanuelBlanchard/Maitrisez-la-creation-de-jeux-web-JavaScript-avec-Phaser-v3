@@ -14,6 +14,7 @@ var player = {
     maxSpeed : 180,
     speedRatio : 7,
     speedReduction : 3,
+    targetAngle : 0,
 
     initialiserPlayer : function() {
         this.aPlayer = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player");
@@ -35,6 +36,7 @@ var player = {
     gererDeplacement : function() {
         this.gererBooleen();
         this.gererMouvement();
+        this.gererRotation();
     },
     
     gererBooleen : function() {
@@ -99,5 +101,49 @@ var player = {
         }
         this.aPlayer.setVelocityX(this.speedX);
         this.aPlayer.setVelocityY(this.speedY);
+    },
+
+    gererRotation : function() {
+        if(this.gauche && !this.droite && !this.bas && !this.haut) {
+            if(this.aPlayer.angle < 90) this.targetAngle = -90;
+            else this.targetAngle = 270;
+        }
+        if(this.gauche && this.bas && !this.droite  && !this.haut) {
+            if(this.aPlayer.angle < 45) this.targetAngle = -135;
+            else this.targetAngle = 225;
+        }
+        if(this.gauche && this.haut && !this.droite && !this.bas) {
+            if(this.aPlayer.angle > 135) this.targetAngle = 315;
+            else this.targetAngle = -45;
+        }
+        if(this.droite && !this.bas && !this.haut && !this.gauche) {
+            if(this.aPlayer.angle > -90) this.targetAngle = 90;
+            else this.targetAngle = -270;
+        }
+        if(this.droite && this.haut && !this.bas  && !this.gauche) {
+            if(this.aPlayer.angle > -135) this.targetAngle = 45;
+            else this.targetAngle = -315;
+        }
+        if(this.droite && this.bas && !this.haut && !this.gauche) {
+            if(this.aPlayer.angle > -45)this.targetAngle = 135;
+            else this.targetAngle = -225;
+        }
+        if(this.haut && !this.gauche && !this.droite && !this.bas) {
+            if(this.aPlayer.angle < 180)this.targetAngle = 0;
+            else this.targetAngle = 360;
+        }
+        if(this.bas && !this.gauche && !this.droite && !this.haut) {
+            if(this.aPlayer.angle > 0) this.targetAngle = 175;
+            else this.targetAngle = -175;
+        }
+
+        if(this.bas || this.haut || this.gauche || this.droite) {
+            if(this.aPlayer.angle < this.targetAngle) {
+                this.aPlayer.angle += this.speedRatio/2;
+            }
+            if(this.aPlayer.angle > this.targetAngle) {
+                this.aPlayer.angle -= this.speedRatio/2;
+            }
+        }
     }
 }
