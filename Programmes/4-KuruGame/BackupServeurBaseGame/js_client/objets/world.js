@@ -40,12 +40,24 @@ var world = {
             color : "#FF0000",
             fontFamily : "ZCOOL KuaiLe"
         }
-        this.scoreText = jeu.scene.add.text (16 , 16, "Score : 0", policeTitre);
+        this.scoreText = jeu.scene.add.text (16,16,"Score : 0",policeTitre);
         this.scoreText.setScrollFactor(0);
-        
     },
     gererCollider : function() {
         jeu.scene.physics.add.overlap(jeu.player.playerCenter,this.drapeauFin, this.finLevel);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 21,this.contactPlayerWorld,this);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 22,this.contactPlayerWorld,this);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 33,this.contactPlayerWorld,this);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 34,this.contactPlayerWorld,this);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 35,this.contactPlayerWorld,this);
+        this.worldLayer.setTileIndexCallback(this.tilesetTerrain.firstgid + 36,this.contactPlayerWorld,this);
+
+        this.worldLayerItem.setTileIndexCallback(this.tilesetItem.firstgid + 6,this.contactPlayerWorld,this);
+
+        jeu.scene.physics.add.overlap(jeu.player.ident, this.worldLayer);
+        jeu.scene.physics.add.overlap(jeu.player.ident2, this.worldLayer);
+        jeu.scene.physics.add.overlap(jeu.player.ident, this.worldLayerItem);
+        jeu.scene.physics.add.overlap(jeu.player.ident2, this.worldLayerItem);
     },
     gererCamera : function() {
         jeu.scene.cameras.main.startFollow(jeu.player.playerCenter);
@@ -60,5 +72,8 @@ var world = {
             jeu.player.playerCenter.body.stop();
             jeu.world.isLevelFin = true;
         }
+    },
+    contactPlayerWorld : function() {
+        console.log("coucou");
     }
 }

@@ -12,6 +12,7 @@ function preload() {
     jeu.scene.load.tilemapTiledJSON("map","level1.json");
     jeu.scene.load.image("playerBarre","playerBarre.png");
     jeu.scene.load.image("playerCenter","playerCenter.png");
+    jeu.scene.load.image("playerIdent","ident.png");
     jeu.scene.load.image("debut","debut.png");
     jeu.scene.load.image("fin","fin.png");
 }

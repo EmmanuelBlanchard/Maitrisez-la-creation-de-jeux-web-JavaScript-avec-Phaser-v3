@@ -3,10 +3,15 @@ var player = {
     playerCenter : null,
     speed : 5,
     ableToMove : true,
+    ident : null,
+    ident2 : null,
 
     initialiserPlayer : function() {
         this.playerBarre = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"playerBarre").setScale(2);
         this.playerCenter = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"playerCenter").setScale(2);
+
+        this.ident = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x + this.playerBarre.width,jeu.world.positionDebut.y,"playerIdent").setScale(0.5);
+        this.ident2 = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x - this.playerBarre.width,jeu.world.positionDebut.y,"playerIdent").setScale(0.5);
     },
     
     generatePlayerAnimations : function() {
@@ -24,6 +29,14 @@ var player = {
         this.playerBarre.y = this.playerCenter.y;
     },
     gererRotation() {
-        this.playerBarre.setAngle(this.playerBarre.angle - 1.5);
+        var angle = this.playerBarre.angle - 1.5;
+        this.playerBarre.setAngle(angle);
+        // Centre du cercle + rayon * cosinus de l'angle en radians
+        this.ident.x = this.playerCenter.x + (this.playerBarre.width - 10) * (Math.cos(angle * Math.PI / 180));
+        // Centre du cercle + rayon * sinus de l'angle en radians
+        this.ident.y = this.playerCenter.y + (this.playerBarre.width - 10) * (Math.sin(angle * Math.PI / 180));
+
+        this.ident2.x = this.playerCenter.x - (this.playerBarre.width - 10) * (Math.cos(angle * Math.PI / 180));
+        this.ident2.y = this.playerCenter.y - (this.playerBarre.width - 10) * (Math.sin(angle * Math.PI / 180));
     },
 }
