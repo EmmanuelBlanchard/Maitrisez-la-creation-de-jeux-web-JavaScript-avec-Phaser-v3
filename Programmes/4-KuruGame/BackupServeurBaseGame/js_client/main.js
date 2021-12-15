@@ -10,8 +10,10 @@ function preload() {
     jeu.scene.load.image("terrain","terrain.png");
     jeu.scene.load.image("tilesPerso","tilesPerso.png");
     jeu.scene.load.tilemapTiledJSON("map","level1.json");
-
-    jeu.scene.load.image("player","player.png");
+    jeu.scene.load.image("playerBarre","playerBarre.png");
+    jeu.scene.load.image("playerCenter","playerCenter.png");
+    jeu.scene.load.image("debut","debut.png");
+    jeu.scene.load.image("fin","fin.png");
 }
 function create() {
     jeu.world.initialiserWorld();

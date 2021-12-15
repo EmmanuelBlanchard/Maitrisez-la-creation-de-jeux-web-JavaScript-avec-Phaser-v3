@@ -25,7 +25,9 @@ var world = {
         this.overlapLayer = this.tilemap.createDynamicLayer("overlap",this.tilesetTerrain,0,0);
 
         this.positionDebut = this.tilemap.findObject("Objects", obj => obj.name === "Debut");
-        this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "fin");
+        this.positionFin = this.tilemap.findObject("Objects", obj => obj.name === "Fin");
+        jeu.scene.add.sprite(this.positionDebut.x, this.positionDebut.y,"debut").setScale(3);
+        jeu.scene.add.sprite(this.positionFin.x, this.positionFin.y,"fin").setScale(3);
 
         this.worldLayer.setCollisionByProperty({Collides : true});
 
@@ -40,11 +42,11 @@ var world = {
         this.scoreText.setScrollFactor(0);
     },
     gererCollider : function() {
-        jeu.scene.physics.add.collider(jeu.player.aPlayer, this.worldLayer)
-        jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
+        // jeu.scene.physics.add.collider(jeu.player.aPlayer, this.worldLayer)
+        // jeu.scene.physics.add.overlap(jeu.player.aPlayer, this.overlapLayer);
     },
     gererCamera : function() {
-        jeu.scene.cameras.main.startFollow(jeu.player.aPlayer);
+        jeu.scene.cameras.main.startFollow(jeu.player.playerCenter);
         jeu.scene.cameras.main.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
     },
 }
