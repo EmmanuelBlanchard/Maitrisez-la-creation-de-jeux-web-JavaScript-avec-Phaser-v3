@@ -43,6 +43,13 @@ function update(time,delta) {
     ajusterTailleEcran();
     jeu.player.gererDeplacement();
     jeu.player.tirer();
+    ennemisTirer();
+}
+
+function ennemisTirer() {
+    for (var i = 0 ; i < jeu.ennemis.length; i++) {
+        jeu.ennemis[i].tirer();
+    }
 }
 
 function creerAnimations() {
