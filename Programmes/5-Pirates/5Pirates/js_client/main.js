@@ -35,11 +35,11 @@ function create() {
     jeu.world.gererCollider();
     creerAnimations();
 
-    var e1 = jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x - 100,jeu.player.aPlayer.y - 100);
-    e1.initEnnemi();
+    var e1 = jeu.ennemiTemplate.createEnnemi();
+    e1.initEnnemi(jeu.world.positionsEnnemis[0]);
     jeu.ennemis.push(e1);
-    var e2 = jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x + 100,jeu.player.aPlayer.y - 200);
-    e2.initEnnemi();
+    var e2 = jeu.ennemiTemplate.createEnnemi();
+    e2.initEnnemi(jeu.world.positionsEnnemis[1]);
     jeu.ennemis.push(e2);
 }
 function update(time,delta) {

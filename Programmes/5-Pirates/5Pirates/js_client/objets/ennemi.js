@@ -7,13 +7,20 @@ var ennemiTemplate = {
             bullets : null,
             range : 500,
             isAlive : true,
+            startPosition : null,
+            targetPosition : null,
         
-            initEnnemi : function () {
-                this.aEnnemi = jeu.scene.physics.add.sprite(posX,posY,"ennemi1a");
+            initEnnemi : function (positionDebut) {
+                this.startPosition = positionDebut;
+                this.targetPosition = {
+                    x : positionDebut.properties[0].value,
+                    y : positionDebut.properties[1].value
+                }
+                this.aEnnemi = jeu.scene.physics.add.sprite(this.startPosition.x,this.startPosition.y,"ennemi1a");
                 this.aEnnemi.pv = 100;
-                this.aEnnemi.barreRouge = jeu.scene.physics.add.sprite(posX,posY,"lifeRED").setOrigin(0,0);
+                this.aEnnemi.barreRouge = jeu.scene.physics.add.sprite(this.startPosition.x,this.startPosition.y,"lifeRED").setOrigin(0,0);
                 this.aEnnemi.barreRouge.setPosition(this.aEnnemi.barreRouge.x - this.aEnnemi.barreRouge.width/2,this.aEnnemi.barreRouge.y);
-                this.aEnnemi.barreVerte = jeu.scene.physics.add.sprite(posX,posY,"life").setOrigin(0,0);
+                this.aEnnemi.barreVerte = jeu.scene.physics.add.sprite(this.startPosition.x,this.startPosition.y,"life").setOrigin(0,0);
                 this.aEnnemi.barreVerte.setPosition(this.aEnnemi.barreVerte.x - this.aEnnemi.barreVerte.width/2,this.aEnnemi.barreVerte.y);
                 this.bullets = jeu.scene.physics.add.group({
                     defaultKey : "cannonBall"
@@ -43,11 +50,11 @@ var ennemiTemplate = {
             },
 
             tirer : function() {
-                if(this.isAlive && this.aEnnemi.pv <=0) this.isAlive = false;
-                if(jeu.player.isAlive && this.isAlive && Math.abs(this.aEnnemi.x - jeu.player.aPlayer.x) < this.range && Math.abs(this.aEnnemi.y - jeu.player.aPlayer.y < this.range)) {
+                if(this.isAlive && this.aEnnemi.pv <= 0 ) this.isAlive = false;
+                if(jeu.player.isAlive && this.isAlive && Math.abs(this.aEnnemi.x - jeu.player.aPlayer.x) < this.range && Math.abs(this.aEnnemi.y - jeu.player.aPlayer.y) < this.range) {
                     if(jeu.scene.time.now > this.nextFire) {
                         this.nextFire = jeu.scene.time.now  + this.fireRate;
-                        var shoot = this.bullets.get(this.aEnnemi.x,this.aEnnemi.y);
+                        var shoot = this.bullets.get(this.aEnnemi.x,this.aEnnemi.y)
                         jeu.scene.physics.moveTo(shoot, jeu.player.aPlayer.x,jeu.player.aPlayer.y,750);
                         shoot.checkWorldBounds = true;
                         shoot.outOfBoundsKill = true;

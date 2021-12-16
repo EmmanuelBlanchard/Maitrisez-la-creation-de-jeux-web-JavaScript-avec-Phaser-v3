@@ -62,6 +62,12 @@
                  "height":0,
                  "id":6,
                  "name":"Debut",
+                 "properties":[
+                        {
+                         "name":"nbEnnemis",
+                         "type":"int",
+                         "value":2
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -79,6 +85,50 @@
                  "width":0,
                  "x":919.333,
                  "y":60
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"ennemi1",
+                 "properties":[
+                        {
+                         "name":"finX",
+                         "type":"int",
+                         "value":385
+                        }, 
+                        {
+                         "name":"finY",
+                         "type":"int",
+                         "value":679
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":170,
+                 "y":428
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"ennemi2",
+                 "properties":[
+                        {
+                         "name":"finX",
+                         "type":"int",
+                         "value":955
+                        }, 
+                        {
+                         "name":"finY",
+                         "type":"int",
+                         "value":459
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":806,
+                 "y":318
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -87,7 +137,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":8,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.1",

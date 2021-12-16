@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="8">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="10">
  <tileset firstgid="1" name="tilesheet" tilewidth="64" tileheight="64" tilecount="96" columns="16">
   <image source="../images/tilesheet.png" width="1024" height="384"/>
   <terraintypes>
@@ -509,7 +509,23 @@
   </data>
  </layer>
  <objectgroup id="12" name="Objects">
-  <object id="6" name="Debut" x="509" y="1166"/>
+  <object id="6" name="Debut" x="509" y="1166">
+   <properties>
+    <property name="nbEnnemis" type="int" value="2"/>
+   </properties>
+  </object>
   <object id="7" name="Fin" x="919.333" y="60"/>
+  <object id="8" name="ennemi1" x="192" y="440">
+   <properties>
+    <property name="finX" type="int" value="385"/>
+    <property name="finY" type="int" value="679"/>
+   </properties>
+  </object>
+  <object id="9" name="ennemi2" x="823" y="321">
+   <properties>
+    <property name="finX" type="int" value="955"/>
+    <property name="finY" type="int" value="459"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

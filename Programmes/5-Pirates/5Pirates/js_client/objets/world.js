@@ -10,6 +10,7 @@ var world = {
     drapeauFin : null,
     score : 0,
     scoreText : null,
+    positionsEnnemis : [],
 
     initialiserWorld : function() {
         this.tilemap = jeu.scene.make.tilemap({key: "level1"});
@@ -27,6 +28,13 @@ var world = {
         this.layerLand.setCollisionByProperty({Collides : true});
 
         jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+
+        this.genererPositionsEnnemis();
+    },
+    genererPositionsEnnemis : function() {
+        for (var i = 1 ; i <= this.positionDebut.properties[0].value ; i++) {
+            this.positionsEnnemis.push(this.tilemap.findObject("Objects", obj => obj.name === "ennemi"+i));
+        }
     },
     gererCollider : function() {
         jeu.scene.physics.add.collider(jeu.player.aPlayer,this.layerLand);
