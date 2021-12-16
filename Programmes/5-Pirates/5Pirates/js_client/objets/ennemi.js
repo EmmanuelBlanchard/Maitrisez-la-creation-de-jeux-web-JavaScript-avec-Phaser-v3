@@ -23,6 +23,7 @@ var ennemiTemplate = {
             gererCollide : function() {
                 jeu.scene.physics.add.collider(this.aEnnemi,jeu.world.layerLand);
                 this.aEnnemi.collisionBullet = jeu.scene.physics.add.overlap(this.aEnnemi, jeu.player.bullets,this.takeDamage);
+                jeu.scene.physics.add.overlap(jeu.player.aPlayer,this.bullets,jeu.player.takeDamage);
             },
             takeDamage : function(ennemi,bullets) {
                 bullets.destroy();
@@ -35,16 +36,18 @@ var ennemiTemplate = {
                 } else if(ennemi.pv >= 1) {
                     ennemi.setTexture("ennemi1c");
                 } else {
+                    ennemi.setTexture("ennemi1d");
                     jeu.ennemiTemplate.detruireBateau(ennemi);
                 }
                 ennemi.barreVerte.setScale(ennemi.pv / 100,1);
             },
 
             tirer : function() {
-                if(this.isAlive && Math.abs(this.aEnnemi.x - jeu.player.aPlayer.x) < this.range && Math.abs(this.aEnnemi.y - jeu.player.aPlayer.y < this.range)) {
+                if(this.isAlive && this.aEnnemi.pv <=0) this.isAlive = false;
+                if(jeu.player.isAlive && this.isAlive && Math.abs(this.aEnnemi.x - jeu.player.aPlayer.x) < this.range && Math.abs(this.aEnnemi.y - jeu.player.aPlayer.y < this.range)) {
                     if(jeu.scene.time.now > this.nextFire) {
                         this.nextFire = jeu.scene.time.now  + this.fireRate;
-                        var shoot = this.bullets.get(this.aEnnemi.x,this.aEnnemi.y)
+                        var shoot = this.bullets.get(this.aEnnemi.x,this.aEnnemi.y);
                         jeu.scene.physics.moveTo(shoot, jeu.player.aPlayer.x,jeu.player.aPlayer.y,750);
                         shoot.checkWorldBounds = true;
                         shoot.outOfBoundsKill = true;
@@ -55,7 +58,6 @@ var ennemiTemplate = {
         return ennemi;
     },
     detruireBateau : function(ennemi) {
-        ennemi.setTexture("ennemi1d");
         jeu.scene.physics.world.removeCollider(ennemi.collisionBullet);
         var explosions = [];
         explosions.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction"));

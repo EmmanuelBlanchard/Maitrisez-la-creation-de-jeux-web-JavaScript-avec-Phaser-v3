@@ -11,7 +11,10 @@ function preload() {
     jeu.scene = this;
     jeu.scene.load.image("tiles","tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("level1","level1.json");
-    jeu.scene.load.image("player","shipG.png");
+    jeu.scene.load.image("player","player/player.png");
+    jeu.scene.load.image("player2","player/player2.png");
+    jeu.scene.load.image("player3","player/player3.png");
+    jeu.scene.load.image("player4","player/player4.png");
     jeu.scene.load.image("debut","debut.png");
     jeu.scene.load.image("fin","fin.png");
     jeu.scene.load.image("cannonBall","cannonBall.png");

@@ -21,6 +21,7 @@ var player = {
     nextFire : 0,
     bullets : null,
     attaque : 15,
+    isAlive : true,
 
     initialiserPlayer : function() {
         this.aPlayer = jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player");
@@ -44,7 +45,13 @@ var player = {
 
         this.bullets = jeu.scene.physics.add.group({
             defaultKey : "cannonBall"
-        })
+        });
+
+        this.aPlayer.pv = 100;
+        this.aPlayer.barreRouge = jeu.scene.physics.add.sprite(this.aPlayer.x,this.aPlayer.y,"lifeRED").setOrigin(0,0);
+        this.aPlayer.barreRouge.setPosition(this.aPlayer.barreRouge.x - this.aPlayer.barreRouge.width/2,this.aPlayer.barreRouge.y);
+        this.aPlayer.barreVerte = jeu.scene.physics.add.sprite(this.aPlayer.x,this.aPlayer.y,"life").setOrigin(0,0);
+        this.aPlayer.barreVerte.setPosition(this.aPlayer.barreVerte.x - this.aPlayer.barreVerte.width/2,this.aPlayer.barreVerte.y);
     },
     
     generatePlayerAnimations : function() {
@@ -52,9 +59,11 @@ var player = {
     },
 
     gererDeplacement : function() {
-        this.gererBooleen();
-        this.gererMouvement();
-        this.gererRotation();
+        if(this.isAlive) {
+            this.gererBooleen();
+            this.gererMouvement();
+            this.gererRotation();
+        }
     },
     
     gererBooleen : function() {
@@ -119,6 +128,10 @@ var player = {
         }
         this.aPlayer.setVelocityX(this.speedX);
         this.aPlayer.setVelocityY(this.speedY);
+        this.aPlayer.barreRouge.x = this.aPlayer.x - this.aPlayer.barreRouge.width/2;
+        this.aPlayer.barreRouge.y = this.aPlayer.y;
+        this.aPlayer.barreVerte.x = this.aPlayer.x - this.aPlayer.barreVerte.width/2;
+        this.aPlayer.barreVerte.y = this.aPlayer.y;
     },
 
     gererRotation : function() {
@@ -163,6 +176,25 @@ var player = {
                 this.aPlayer.angle -= this.speedRatio/2;
             }
         }
+    },
+    takeDamage : function(player,bullets) {
+        bullets.destroy();
+        player.pv -= 10;
+        if(player.pv < 0)  {
+            jeu.player.isAlive = false;
+            player.pv = 0;
+        }
+        if(player.pv >= 100) {
+            player.setTexture("player");
+        } else if(player.pv >= 50) {
+            player.setTexture("player2");
+        } else if(player.pv >= 1) {
+            player.setTexture("player3");
+        } else {
+            player.setTexture("player4");
+            jeu.ennemiTemplate.detruireBateau(player);
+        }
+        player.barreVerte.setScale(player.pv / 100,1);
     },
 
     tirer : function() {
