@@ -53,11 +53,9 @@ var player = {
         this.aPlayer.barreVerte = jeu.scene.physics.add.sprite(this.aPlayer.x,this.aPlayer.y,"life").setOrigin(0,0);
         this.aPlayer.barreVerte.setPosition(this.aPlayer.barreVerte.x - this.aPlayer.barreVerte.width/2,this.aPlayer.barreVerte.y);
     },
-    
     generatePlayerAnimations : function() {
        
     },
-
     gererDeplacement : function() {
         if(this.isAlive) {
             this.gererBooleen();
@@ -65,7 +63,6 @@ var player = {
             this.gererRotation();
         }
     },
-    
     gererBooleen : function() {
         if(this.keyD.isDown) {
             this.droite = true;
@@ -87,8 +84,9 @@ var player = {
         } else if (this.keyQ.isUp) {
             this.gauche = false;
         }
+        if(this.keyShift.isDown) this.maxSpeed = 300;
+        if(this.keyShift.isUp) this.maxSpeed = 180;
     },
-    
     gererMouvement : function() {
         if(this.gauche) {
             if(this.speedX > -this.maxSpeed) {
@@ -133,7 +131,6 @@ var player = {
         this.aPlayer.barreVerte.x = this.aPlayer.x - this.aPlayer.barreVerte.width/2;
         this.aPlayer.barreVerte.y = this.aPlayer.y;
     },
-
     gererRotation : function() {
         if(this.gauche && !this.droite && !this.bas && !this.haut) {
             if(this.aPlayer.angle < 90) this.targetAngle = -90;
@@ -196,9 +193,8 @@ var player = {
         }
         player.barreVerte.setScale(player.pv / 100,1);
     },
-
     tirer : function() {
-        if(this.isShooting) {
+        if(this.isShooting && this.isAlive) {
             if(jeu.scene.time.now > this.nextFire) {
                 this.nextFire = jeu.scene.time.now + this.fireRate;
                 var shoot = this.bullets.get(this.aPlayer.x,this.aPlayer.y);

@@ -97,15 +97,19 @@ var ennemiTemplate = {
         jeu.scene.physics.world.removeCollider(ennemi.collisionBullet);
         var explosions = [];
         explosions.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction"));
+        jeu.scene.sound.play("explosionSound");
         jeu.scene.time.delayedCall(200,function() {
             explosions.push(jeu.scene.physics.add.sprite(ennemi.x-20,ennemi.y-20).play("destruction").setScale(0.5));
             explosions.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y+20).play("destruction").setScale(0.5));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(400,function() {
             explosions.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y-20).play("destruction").setScale(0.8));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(600,function() {
             explosions.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction").setScale(2));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(900,function() {
             ennemi.barreRouge.destroy();
