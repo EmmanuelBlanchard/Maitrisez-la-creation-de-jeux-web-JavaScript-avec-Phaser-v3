@@ -9,6 +9,7 @@ var ennemiTemplate = {
             isAlive : true,
             startPosition : null,
             targetPosition : null,
+            goToFin : true,
         
             initEnnemi : function (positionDebut) {
                 this.startPosition = positionDebut;
@@ -17,6 +18,7 @@ var ennemiTemplate = {
                     y : positionDebut.properties[1].value
                 }
                 this.aEnnemi = jeu.scene.physics.add.sprite(this.startPosition.x,this.startPosition.y,"ennemi1a");
+                this.aEnnemi.setSize(50,50);
                 this.aEnnemi.pv = 100;
                 this.aEnnemi.barreRouge = jeu.scene.physics.add.sprite(this.startPosition.x,this.startPosition.y,"lifeRED").setOrigin(0,0);
                 this.aEnnemi.barreRouge.setPosition(this.aEnnemi.barreRouge.x - this.aEnnemi.barreRouge.width/2,this.aEnnemi.barreRouge.y);
@@ -25,6 +27,10 @@ var ennemiTemplate = {
                 this.bullets = jeu.scene.physics.add.group({
                     defaultKey : "cannonBall"
                 })
+
+                var angle = Phaser.Math.Angle.Between(this.startPosition.x,this.startPosition.y,this.targetPosition.x,this.targetPosition.y);
+                angle = angle * 180 / Math.PI - 90;
+                this.aEnnemi.setAngle(angle);
                 this.gererCollide();
             },
             gererCollide : function() {
@@ -48,7 +54,6 @@ var ennemiTemplate = {
                 }
                 ennemi.barreVerte.setScale(ennemi.pv / 100,1);
             },
-
             tirer : function() {
                 if(this.isAlive && this.aEnnemi.pv <= 0 ) this.isAlive = false;
                 if(jeu.player.isAlive && this.isAlive && Math.abs(this.aEnnemi.x - jeu.player.aPlayer.x) < this.range && Math.abs(this.aEnnemi.y - jeu.player.aPlayer.y) < this.range) {
@@ -59,6 +64,30 @@ var ennemiTemplate = {
                         shoot.checkWorldBounds = true;
                         shoot.outOfBoundsKill = true;
                     }
+                }
+            },
+            gererDeplacement : function() {
+                if(this.isAlive) {
+                    if(this.goToFin && Math.abs(this.aEnnemi.x - this.targetPosition.x) > 10 && Math.abs(this.aEnnemi.y - this.targetPosition.y) > 10) {
+                        jeu.scene.physics.moveTo(this.aEnnemi,this.targetPosition.x,this.targetPosition.y,150);
+                    } else {
+                        if(this.goToFin) {
+                            this.goToFin = false;
+                            this.aEnnemi.setFlip(true,true);
+                        }
+                    }
+                    if(!this.goToFin && Math.abs(this.aEnnemi.x - this.startPosition.x) > 10 && Math.abs(this.aEnnemi.y - this.startPosition.y) > 10) {
+                        jeu.scene.physics.moveTo(this.aEnnemi,this.startPosition.x,this.startPosition.y,150);
+                    } else {
+                        if(!this.goToFin) {
+                            this.goToFin = true;
+                            this.aEnnemi.setFlip(false,false);
+                        }
+                    }
+                    this.aEnnemi.barreRouge.x = this.aEnnemi.x - this.aEnnemi.barreRouge.width/2;
+                    this.aEnnemi.barreRouge.y = this.aEnnemi.y;
+                    this.aEnnemi.barreVerte.x = this.aEnnemi.x - this.aEnnemi.barreVerte.width/2;
+                    this.aEnnemi.barreVerte.y = this.aEnnemi.y;
                 }
             }
         }
