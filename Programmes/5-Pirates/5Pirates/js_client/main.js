@@ -21,12 +21,16 @@ function preload() {
     jeu.scene.load.image("ennemi1d","ennemi/ennemi1d.png");
     jeu.scene.load.image("life","life.png");
     jeu.scene.load.image("lifeRED","lifeRED.png");
+    jeu.scene.load.image("explosion1","explosion1.png");
+    jeu.scene.load.image("explosion2","explosion2.png");
+    jeu.scene.load.image("explosion3","explosion3.png");
 }
 function create() {
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
     jeu.world.gererCamera();
     jeu.world.gererCollider();
+    creerAnimations();
 
     var e1 = jeu.ennemiTemplate.createEnnemi(jeu.player.aPlayer.x - 100,jeu.player.aPlayer.y - 100);
     e1.initEnnemi();
@@ -39,6 +43,20 @@ function update(time,delta) {
     ajusterTailleEcran();
     jeu.player.gererDeplacement();
     jeu.player.tirer();
+}
+
+function creerAnimations() {
+    jeu.scene.anims.create({
+        key : "destruction",
+        frames : [
+          {key : "explosion3"},
+          {key : "explosion2",},
+          {key : "explosion1",}
+        ],
+        hideOnComplete : true,
+        frameRate : 10,
+        repeat : 0
+    });
 }
 
 function ajusterTailleEcran() {

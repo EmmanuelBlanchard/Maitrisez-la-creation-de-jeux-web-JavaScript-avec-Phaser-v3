@@ -37,10 +37,25 @@ var ennemiTemplate = {
     detruireBateau : function(ennemi) {
         ennemi.setTexture("ennemi1d");
         jeu.scene.physics.world.removeCollider(ennemi.collisionBullet);
-        jeu.scene.time.delayedCall(1000,function() {
+        var explosions = [];
+        explosions.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction"));
+        jeu.scene.time.delayedCall(200,function() {
+            explosions.push(jeu.scene.physics.add.sprite(ennemi.x-20,ennemi.y-20).play("destruction").setScale(0.5));
+            explosions.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y+20).play("destruction").setScale(0.5));
+        },this);
+        jeu.scene.time.delayedCall(400,function() {
+            explosions.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y-20).play("destruction").setScale(0.8));
+        },this);
+        jeu.scene.time.delayedCall(600,function() {
+            explosions.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction").setScale(2));
+        },this);
+        jeu.scene.time.delayedCall(900,function() {
             ennemi.barreRouge.destroy();
             ennemi.barreVerte.destroy();
             ennemi.destroy();
+            for(var i = 0; i < explosions.length ; i++) {
+                explosions[i].destroy();
+            }
         },this);
     }
 }
